@@ -1,4 +1,3 @@
-#!/bin/env python3
 '''
 Bounces balls around a window and plays noises.
 
@@ -30,7 +29,7 @@ STATUSBAR_X = GAMEAREA_W + SEP_BAR_W
 GAMEAREA_CENTER_X = WINDOW_W / 2
 GAMEAREA_CENTER_Y = WINDOW_H / 2
 
-PLATE_SPEED = 10
+PLATE_SPEED = 10 
 
 INGREDIENT1_IMG = 'ingredient1.png'
 PLATE_IMG = 'plate.png'
@@ -87,22 +86,16 @@ class Ball(pyglet.sprite.Sprite):
         self.collect_sound = pyglet.resource.media(COLLECT_SOUND, streaming=False)
         self.drop_sound = pyglet.resource.media(FOOD_DROP, streaming=False)
         self.dy = 1 * 300
-        self.is_collected = False
-
-    def collect(self):
-        self.set_position(chef.x, chef.y + chef.height + 10)
-        self.is_collected = True
 
     def update(self, dt):
-        if not self.is_collected:
-            if self.y + self.height <= plate.height:
-                if self.x >= plate.x and self.x <= plate.x + plate.width:
-                    self.collect_sound.play()
-                    balls[-1].collect()
-                else:
-                    self.drop_sound.play()
-                    del balls[-1]
-            self.y -= self.dy * dt
+        if self.y + self.height <= plate.height:
+            if self.x >= plate.x and self.x <= plate.x + plate.width:
+                self.collect_sound.play()
+            else:
+                self.drop_sound.play()
+
+            del balls[-1]
+        self.y -= self.dy * dt
 
 window = pyglet.window.Window(WINDOW_W, WINDOW_H)
 
@@ -145,7 +138,7 @@ def setup():
     #glPolygonMode(GL_FRONT_AND_BACK, GL_LINE)
 
     # Simple light setup.  On Windows GL_LIGHT0 is enabled by default,
-    # but this is not the case on Linux or Mac, so remember to always
+    # but this is not the case on Linux or Mac, so remember to always 
     # include it.
     glEnable(GL_LIGHTING)
     glEnable(GL_LIGHT0)
@@ -180,7 +173,7 @@ chef_img = pyglet.resource.image(CHEF_IMG)
 chef = pyglet.sprite.Sprite(chef_img, x=(STATUSBAR_X + STATUSBAR_W // 2), y=10)
 label = pyglet.text.Label('Dish',
                           font_size=14,
-                          x=STATUSBAR_X + STATUSBAR_W // 2, y=STATUSBAR_H - 100,
+                          x=STATUSBAR_X + STATUSBAR_W // 2, y=STATUSBAR_H - 100, 
                           anchor_x='center')
 setup()
 
