@@ -15,7 +15,16 @@ class PauseState(GameState):
     def on_draw(self):
         self.label.draw()
 
-    def update(self, keys_pressed, dt):
+    def update(self, dt):
         pass
+
+    def on_key_press(self, key, modifiers, states):
+        pass
+
+    def on_key_release(self, key, modifiers, states):
+        if key == pyglet.window.key.SPACE:
+            states.pop()        
+        
+
 
     
