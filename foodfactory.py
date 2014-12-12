@@ -11,11 +11,12 @@ import os
 import random
 import sys
 import math
-
-from pyglet.gl import *
 import pyglet
 
 from ingredients import Ingredient
+
+from pyglet.gl import *
+from consts import config, WINDOW_W, WINDOW_H, SEP_BAR_W, STATUSBAR_W, STATUSBAR_H, GAMEAREA_W, GAMEAREA_H, STATUSBAR_X, GAMEAREA_CENTER_X, GAMEAREA_CENTER_Y, PLATE_SPEED, PLATE_IMG
 
 
 window = pyglet.window.Window(WINDOW_W, WINDOW_H)
@@ -47,7 +48,7 @@ def on_draw():
     balls_batch.draw()
     label.draw()
     chef.draw()
-    
+
 
 def update(dt):
     for ball in balls:
