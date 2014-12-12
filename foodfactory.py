@@ -134,10 +134,11 @@ def on_draw():
     glColor3f(1, 0, 0)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     draw_status_bar()
+    plate.draw()
     balls_batch.draw()
     label.draw()
     chef.draw()
-    plate.draw()
+    
 
 def update(dt):
     for ball in balls:
