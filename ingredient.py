@@ -1,3 +1,5 @@
+import pyglet
+
 from consts import GAMEAREA_W, GAMEAREA_W
 
 class Ingredient(pyglet.sprite.Sprite):
