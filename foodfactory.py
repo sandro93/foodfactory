@@ -4,6 +4,7 @@ Bounces balls around a window and plays noises.
 
 This is a simple demonstration of how pyglet efficiently manages many sound
 channels without intervention.
+
 '''
 
 import os
