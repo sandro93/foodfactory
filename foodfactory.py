@@ -11,39 +11,37 @@ import os
 import random
 import sys
 import math
-
-from pyglet.gl import *
 import pyglet
 
-
-WINDOW_W = 800
-WINDOW_H = 600
-
-STATUSBAR_W = WINDOW_W // 4
-STATUSBAR_H = WINDOW_H
-SEP_BAR_W = 1
-GAMEAREA_W = WINDOW_W - STATUSBAR_W - SEP_BAR_W
-GAMEAREA_H = WINDOW_H
+from pyglet.gl import *
+from consts import config, WINDOW_W, WINDOW_H, SEP_BAR_W, STATUSBAR_W, STATUSBAR_H, GAMEAREA_W, GAMEAREA_H, STATUSBAR_X, GAMEAREA_CENTER_X, GAMEAREA_CENTER_Y, PLATE_SPEED, PLATE_IMG                
 
 
-STATUSBAR_X = GAMEAREA_W + SEP_BAR_W
-
-GAMEAREA_CENTER_X = WINDOW_W / 2
-GAMEAREA_CENTER_Y = WINDOW_H / 2
-
-PLATE_SPEED = 10
-
-INGREDIENT1_IMG = 'ingredient1.png'
-PLATE_IMG = 'plate.png'
-CHEF_IMG = 'chef.png'
-
-FOOD_DROP = 'drop.wav'
-COLLECT_SOUND = 'collect.wav'
+##WINDOW_W = 800
+##WINDOW_H = 600
+##
+##STATUSBAR_W = WINDOW_W // 4
+##STATUSBAR_H = WINDOW_H
+##SEP_BAR_W = 1
+##GAMEAREA_W = WINDOW_W - STATUSBAR_W - SEP_BAR_W
+##GAMEAREA_H = WINDOW_H
+##
+##
+##STATUSBAR_X = GAMEAREA_W + SEP_BAR_W
+##
+##GAMEAREA_CENTER_X = WINDOW_W / 2
+##GAMEAREA_CENTER_Y = WINDOW_H / 2
+##
+##PLATE_SPEED = 10
+##
+##INGREDIENT1_IMG = 'ingredient1.png'
+##PLATE_IMG = 'plate.png'
+##CHEF_IMG = 'chef.png'
+##
+##FOOD_DROP = 'drop.wav'
+##COLLECT_SOUND = 'collect.wav'
 
 window = pyglet.window.Window(WINDOW_W, WINDOW_H)
-
-if len(sys.argv) > 1:
-    FOOD_DROP = sys.argv[1]
 
 keys_pressed = []
 
