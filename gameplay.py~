@@ -1,0 +1,7 @@
+from gamestate import GameState
+
+class PlayState(GameState):
+    def on_draw():
+        pyglet.graphics.draw(2, pyglet.gl.GL_LINES,
+                         ('v2i', (STATUSBAR_X, 0, STATUSBAR_X, STATUSBAR_H)))
+        
