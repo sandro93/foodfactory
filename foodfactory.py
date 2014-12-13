@@ -21,6 +21,7 @@ from consts import config, WINDOW_W, WINDOW_H, SEP_BAR_W, STATUSBAR_W, STATUSBAR
 import gamestate
 from gameplay import PlayState
 from pause import PauseState
+from mainmenu import MenuState
 
 # setup a stack for our game states
 states = []
@@ -62,7 +63,7 @@ def update(dt):
 # setup the inital states
 states.append(PlayState(window))
 # game starts paused
-states.append(PauseState(window))
+states.append(MenuState(window))
 
 pyglet.clock.schedule_interval(update, 1/60.)
 
