@@ -18,7 +18,6 @@ class Plate(pyglet.sprite.Sprite):
         # self.collect_sound = pyglet.resource.media(COLLECT_SOUND, streaming=False)
 
     def update(self, keys_pressed, dt):
-        pprint.pprint(keys_pressed)
         rect_x, rect_y = math.ceil(self.position[0]), 0
         if len(keys_pressed) > 0:
             if  keys_pressed[0] == pyglet.window.key.LEFT:
