@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-
+<level>
 <dishImage>../../../graphics/dishes/lobiani.png</dishImage>
 
 <ingredients>
@@ -74,3 +74,4 @@
 		</ingredientIDs>
 	</dishState>
 </dishStates>
+</level>
