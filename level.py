@@ -6,10 +6,11 @@ from consts import GAMEAREA_W, GAMEAREA_H
 class Level:
     ingredients = []
     
-    def __init__(self, region_id, level):
-        self.region_id = region_id
-        self.level = level
-        self.ingredients.append(Ingredient('carrot.png', 1, 1, [0, 1], None, None))
+    def __init__(self, dish_image, ingredients, dish_states):
+#        self.ingredients.append(Ingredient('carrot.png', 1, 1, [0, 1], None, None))
+        self.dish_image = dish_image
+        self.ingredients = ingredients
+        self.dish_states = dish_states
         self.total_steps = 0
         
         for ing in self.ingredients:
@@ -22,7 +23,7 @@ class Ingredient(pyglet.sprite.Sprite):
     def __init__(self, image, ingredient_id, group, steps, collect_sound = None, drop_sound = None):
         self.steps = steps
         self.ingredient_id = ingredient_id
-        self.group = group
+        self.grp = group
         ingredient_image = pyglet.resource.image(image)
         self.width = ingredient_image.width
         self.height = ingredient_image.height
@@ -50,3 +51,8 @@ class Ingredient(pyglet.sprite.Sprite):
 ##                    self.drop_sound.play()
 ##                    del balls[-1]
 ##            self.y -= self.dy * dt
+
+class DishState():
+    def __init__(self, image, ingredient_ids):
+        self.image = image
+        self.ingredient_ids = ingredient_ids

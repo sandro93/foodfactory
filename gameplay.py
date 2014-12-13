@@ -4,10 +4,10 @@ from pause import PauseState
 import math
 from gamestate import GameState, PLAY_STATE_ID
 from consts import GAMEAREA_CENTER_X, GAMEAREA_CENTER_Y, PLATE_SPEED, STATUSBAR_X, STATUSBAR_W, STATUSBAR_H, GAMEAREA_W
-
+from worldbuilder.world import World
 
 class Plate(pyglet.sprite.Sprite):
-    def __init__(self, img='plate.png'):
+    def __init__(self, img='graphics/plate.png'):
         plate_img = pyglet.resource.image(img)
         width = plate_img.width
         height = plate_img.height
@@ -15,6 +15,8 @@ class Plate(pyglet.sprite.Sprite):
         y = 0
         dx = PLATE_SPEED
         super(Plate, self).__init__(plate_img, x, y)
+        self.world = World('guria')
+        self.level = self.world.get_level(1)
         # self.collect_sound = pyglet.resource.media(COLLECT_SOUND, streaming=False)
 
     def update(self, keys_pressed, dt):
@@ -40,7 +42,7 @@ class PlayState(GameState):
     def __init__(self, window):
         self.window = window
         self.plate = Plate()
-        chef_img = pyglet.resource.image('chef.png')
+        chef_img = pyglet.resource.image('graphics/chef.png')
         self.chef = pyglet.sprite.Sprite(chef_img, x=(STATUSBAR_X + STATUSBAR_W // 2), y=10)
         self.id = PLAY_STATE_ID
         self.keys_pressed = []
