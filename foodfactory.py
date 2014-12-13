@@ -13,7 +13,7 @@ import sys
 import math
 import pyglet
 
-from ingredient import Ingredient
+from level import Ingredient
 
 from pyglet.gl import *
 from consts import config, WINDOW_W, WINDOW_H, SEP_BAR_W, STATUSBAR_W, STATUSBAR_H, GAMEAREA_W, GAMEAREA_H, STATUSBAR_X, GAMEAREA_CENTER_X, GAMEAREA_CENTER_Y, PLATE_SPEED, PLATE_IMG

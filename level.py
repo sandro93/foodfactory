@@ -9,7 +9,7 @@ class Level:
     def __init__(self, region_id, level):
         self.region_id = region_id
         self.level = level
-        self.ingredients.append(Ingredient('carrot.png', None, None, 1, 1, [0, 1]))
+        self.ingredients.append(Ingredient('carrot.png', 1, 1, [0, 1], None, None))
         self.total_steps = 0
         
         for ing in self.ingredients:
@@ -19,7 +19,7 @@ class Level:
 
 
 class Ingredient(pyglet.sprite.Sprite):
-    def __init__(self, image, collect_sound = None, drop_sound = None, ingredient_id, group, steps):
+    def __init__(self, image, ingredient_id, group, steps, collect_sound = None, drop_sound = None):
         self.steps = steps
         self.ingredient_id = ingredient_id
         self.group = group
