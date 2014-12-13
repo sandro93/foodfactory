@@ -1,7 +1,9 @@
+import pprint
 import pyglet
+from pause import PauseState
 import math
 from gamestate import GameState, PLAY_STATE_ID
-from consts import GAMEAREA_CENTER_X, GAMEAREA_CENTER_Y, PLATE_SPEED, STATUSBAR_X, STATUSBAR_W, STATUSBAR_H
+from consts import GAMEAREA_CENTER_X, GAMEAREA_CENTER_Y, PLATE_SPEED, STATUSBAR_X, STATUSBAR_W, STATUSBAR_H, GAMEAREA_W
 
 
 class Plate(pyglet.sprite.Sprite):
@@ -16,6 +18,7 @@ class Plate(pyglet.sprite.Sprite):
         # self.collect_sound = pyglet.resource.media(COLLECT_SOUND, streaming=False)
 
     def update(self, keys_pressed, dt):
+        pprint.pprint(keys_pressed)
         rect_x, rect_y = math.ceil(self.position[0]), 0
         if len(keys_pressed) > 0:
             if  keys_pressed[0] == pyglet.window.key.LEFT:
@@ -41,6 +44,7 @@ class PlayState(GameState):
         chef_img = pyglet.resource.image('chef.png')
         self.chef = pyglet.sprite.Sprite(chef_img, x=(STATUSBAR_X + STATUSBAR_W // 2), y=10)
         self.id = PLAY_STATE_ID
+        self.keys_pressed = []
 
     def on_draw(self):
         # draw status bar/gamearea separator
@@ -49,6 +53,15 @@ class PlayState(GameState):
         self.plate.draw()
         self.chef.draw()
 
-    def update(self, keys_pressed, dt):
-        self.plate.update(keys_pressed, dt)
-        
+    def update(self, dt):
+        self.plate.update(self.keys_pressed, dt)
+
+    def on_key_press(self, key, modifiers, states):
+        if key in (pyglet.window.key.LEFT, pyglet.window.key.RIGHT):
+            self.keys_pressed.append(key)
+            
+    def on_key_release(self, key, modifiers, states):
+        if key == pyglet.window.key.SPACE:
+            states.append(PauseState(self.window))
+        elif key in (pyglet.window.key.LEFT, pyglet.window.key.RIGHT):
+            self.keys_pressed.remove(key)

@@ -22,7 +22,8 @@ import gamestate
 from gameplay import PlayState
 from pause import PauseState
 
-state = None
+# setup a stack for our game states
+states = []
 
 window = pyglet.window.Window(WINDOW_W, WINDOW_H)
 state = PauseState(window)
@@ -31,23 +32,16 @@ keys_pressed = []
 
 @window.event
 def on_key_press(key, modifiers):
-    #if state.id == gamestate.PAUSE_STATE_ID:
-    if key == pyglet.window.key.SPACE:
-        # balls.append(Ingredient())
-        # state = PlayState()
-        global state
-        state = PlayState(window)
+    if len(states):
+        states[-1].on_key_press(key, modifiers, states)
 
-    elif key == pyglet.window.key.ESCAPE:
-        window.has_exit = True
-    elif key in (pyglet.window.key.LEFT, pyglet.window.key.RIGHT):
-            keys_pressed.append(key)
+    # elif key in (pyglet.window.key.LEFT, pyglet.window.key.RIGHT):
+    #         keys_pressed.append(key)
 
 @window.event
 def on_key_release(key, modifiers):
-    if state.id == gamestate.PAUSE_STATE_ID:
-        if key in (pyglet.window.key.LEFT, pyglet.window.key.RIGHT):
-            keys_pressed.remove(key)
+    if len(states):
+        states[-1].on_key_release(key, modifiers, states)
 
 @window.event
 def on_draw():
@@ -56,12 +50,19 @@ def on_draw():
     glColor3f(1, 0, 0)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     balls_batch.draw()
-    state.on_draw()
+    if len(states):
+        states[-1].on_draw()
 
 def update(dt):
     for ball in balls:
         ball.update(dt, plate)
-    state.update(keys_pressed, dt)
+    if len(states):
+        states[-1].update(dt)
+
+# setup the inital states
+states.append(PlayState(window))
+# game starts paused
+states.append(PauseState(window))
 
 pyglet.clock.schedule_interval(update, 1/60.)
 

@@ -14,3 +14,9 @@ class GameState:
 
     def on_update(dt):
         pass
+
+    def on_key_press(key, modifiers):
+        pass
+
+    def on_key_release(key, modifiers):
+        pass
