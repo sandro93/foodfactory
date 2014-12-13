@@ -27,7 +27,6 @@ from mainmenu import MenuState
 states = []
 
 window = pyglet.window.Window(WINDOW_W, WINDOW_H)
-state = PauseState(window)
 
 keys_pressed = []
 
@@ -50,13 +49,13 @@ def on_draw():
     glClearColor(1, 1, 1, 1)
     glColor3f(1, 0, 0)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-    balls_batch.draw()
+    ingredients_batch.draw()
     if len(states):
         states[-1].on_draw()
 
 def update(dt):
-    for ball in balls:
-        ball.update(dt, plate)
+##    for ingredient in balls:
+##        ball.update(dt, plate)
     if len(states):
         states[-1].update(dt)
 
@@ -67,8 +66,8 @@ states.append(MenuState(window))
 
 pyglet.clock.schedule_interval(update, 1/60.)
 
-balls_batch = pyglet.graphics.Batch()
-balls = []
+ingredients_batch = pyglet.graphics.Batch()
+
 label = pyglet.text.Label('Dish',
                           font_size=14,
                           x=STATUSBAR_X + STATUSBAR_W // 2, y=STATUSBAR_H - 100,
