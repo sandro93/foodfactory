@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 
-<dishImage>../../../images/dishes/xachapuri.png</dishImage>
+<dishImage>../../../graphics/dishes/xachapuri.png</dishImage>
 
 <ingredients>
 	<ingredient id="1" group="3">
 		<name>ფქვილი</name>
-		<image>../../../images/ingredients/flour.png</image>
+		<image>../../../graphics/ingredients/flour.png</image>
 		<steps>
 			<step>1</step>
 			<step>2</step>
@@ -13,7 +13,7 @@
 	</ingredient>
 	<ingredient id="2" group="1">
 		<name>წყალი</name>
-		<image>../../../images/ingredients/water.png</image>
+		<image>../../../graphics/ingredients/water.png</image>
 		<steps>
 			<step>1</step>
 			<step>2</step>
@@ -21,53 +21,53 @@
 	</ingredient>
 	<ingredient id="3" group="3">
 		<name>ყველი</name>
-		<image>../../../images/ingredients/chease.png</image>
+		<image>../../../graphics/ingredients/chease.png</image>
 		<steps>
 			<step>3</step>			
 		</steps>
 	</ingredient>
 	<ingredient id="4" group="2">
 		<name>ბანანი</name>
-		<image>../../../images/ingredients/banana.png</image>
+		<image>../../../graphics/ingredients/banana.png</image>
 		<steps />
 	</ingredient>
 	<ingredient id="5" group="1">
 		<name>ალუბალი</name>
-		<image>../../../images/cherry.png</image>
+		<image>../../../graphics/cherry.png</image>
 		<steps />
 	</ingredient>
 	<ingredient id="6" group="3">
 		<name>კომბოსტო</name>
-		<image>../../../images/ingredients/cabbage.png</image>
+		<image>../../../graphics/ingredients/cabbage.png</image>
 		<steps />
 	</ingredient>
 	<ingredient id="7" group="2">
 		<name>ფორთოხალი</name>
-		<image>../../../images/ingredients/orange.png</image>
+		<image>../../../graphics/ingredients/orange.png</image>
 		<steps />
 	</ingredient>
 	<ingredient id="8" group="3">
 		<name>სტაფილო</name>
-		<image>../../../images/ingredients/carrot.png</image>
+		<image>../../../graphics/ingredients/carrot.png</image>
 		<steps />
 	</ingredient>
 </ingredients>
 
 <dishStates>
 	<dishState>
-		<image>../../../images/dishes/water.png</image>
+		<image>../../../graphics/dishes/water.png</image>
 		<ingredientIDs>
 			<id>2</id>
 		</ingredientIDs>
 	</dishState>
 	<dishState>
-		<image>../../../images/dishes/flour.png</image>
+		<image>../../../graphics/dishes/flour.png</image>
 		<ingredientIDs>
 			<id>1</id>
 		</ingredientIDs>
 	</dishState>
 	<dishState>
-		<image>../../../images/dishes/flour-water.png</image>
+		<image>../../../graphics/dishes/flour-water.png</image>
 		<ingredientIDs>
 			<id>1</id>
 			<id>2</id>
