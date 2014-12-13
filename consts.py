@@ -20,6 +20,8 @@ GAMEAREA_H = WINDOW_H
 STATUSBAR_X = GAMEAREA_W + SEP_BAR_W
 GAMEAREA_CENTER_X = WINDOW_W // 2
 GAMEAREA_CENTER_Y = WINDOW_H // 2
+DEFAULT_DATADIR = config.get('world', 'datadir')
+LEVEL_WORD = config.get('world', 'level_word')
 
 
 # Plate
