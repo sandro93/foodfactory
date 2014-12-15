@@ -17,7 +17,7 @@ class LevelParser:
     def __init__(self, level_file):
         self.tree = ET.parse(level_file)
         self.root = self.tree.getroot()
-        
+
     def _obtain_ingredients(self, elem):
         ingredients = []
         for ing in elem:
@@ -42,7 +42,7 @@ class LevelParser:
 
     def _obtain_dish_image(self, elem):
         return elem.text
-        
+
 
     def _obtain_dish_states(self, elem):
         dish_states = []
@@ -69,8 +69,8 @@ class LevelParser:
             elif child.tag == XML_DISH_STATES:
                 dish_states = self._obtain_dish_states(child)
         pprint.pprint(ingredients)
-        print(dish_image)        
+        print(dish_image)
         return level.Level(dish_image, ingredients, dish_states)
-            
+
 
 
