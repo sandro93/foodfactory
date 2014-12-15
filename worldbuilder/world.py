@@ -10,7 +10,7 @@ class World:
     def get_level(self, level_n):
         levels_dir = os.path.join(self.world_dir, LEVEL_WORD + str(level_n))
         level_file = random.choice(os.listdir(levels_dir))
-        parser = LevelParser(os.path.join(levels_dir, level_file))
+        parser = LevelParser(os.path.join(levels_dir, level_file))        
         return parser.parse_level()
 
     

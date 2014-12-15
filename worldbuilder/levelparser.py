@@ -25,10 +25,10 @@ class LevelParser:
                 elif child.tag == 'steps':
                     for step in child:
                         steps.append(step.text)
-            print(image)
+            print('surati '+image)
             print(os.getcwd())
-            # ingredient = level.Ingredient(image, ingredient_id, group, steps)
-            # ingredients.append(ingredient)
+            ingredient = level.Ingredient(image, ingredient_id, group, steps)
+            ingredients.append(ingredient)
         return ingredients
 
     def _obtain_dish_image(self, elem):
@@ -60,7 +60,7 @@ class LevelParser:
             elif child.tag == 'dishStates':
                 dish_states = self._obtain_dish_states(child)
         pprint.pprint(ingredients)
-        print(dish_image)
+        print(dish_image)        
         return level.Level(dish_image, ingredients, dish_states)
         # ingredients = self.root.iter('ingredients')
         # for ingredient in ingredients:
