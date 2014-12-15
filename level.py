@@ -1,5 +1,5 @@
 import pyglet
-
+import random
 from consts import GAMEAREA_W, GAMEAREA_H
 
 
@@ -20,18 +20,20 @@ class Level:
 
 
 class Ingredient(pyglet.sprite.Sprite):
-    def __init__(self, image, ingredient_id, group, steps, collect_sound = None, drop_sound = None):
+    def __init__(self, image, ingredient_id, group, steps, collect_sound = 'collect.wav', drop_sound = 'drop.wav'):
+        print("Image = {0}, ingredient_id = {1}, group = {2}, steps = {3}".format(image, ingredient_id, group, steps))
         self.steps = steps
         self.ingredient_id = ingredient_id
         self.grp = group
         ingredient_image = pyglet.resource.image(image)
-        self.width = ingredient_image.width
-        self.height = ingredient_image.height
-        x = random.random() * (GAMEAREA_W - self.width)
-        y = GAMEAREA_H - self.height
+        # self.width = ingredient_image.width
+        # self.height = ingredient_image.height
+        x = random.random() * (GAMEAREA_W - ingredient_image.width)
+        y = GAMEAREA_H - ingredient_image.height
+        super(Ingredient, self).__init__(ingredient_image, x, y)
 
         #super(Ingredient, self).__init__(self.ingredient_image, x, y, batch=balls_batch)
-        super(Ingredient, self).__init__(self.ingredient_image, x, y)
+
         self.collect_sound = pyglet.resource.media(collect_sound, streaming=False)
         self.drop_sound = pyglet.resource.media(drop_sound, streaming=False)
         self.dy = 1 * 300

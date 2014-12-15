@@ -3,6 +3,16 @@ import level
 import pprint
 import os
 
+XML_ID = 'id'
+XML_GROUP = 'group'
+XML_NAME = 'name'
+XML_IMAGE = 'image'
+XML_STEPS = 'steps'
+XML_INGREDIENT_IDS = 'ingredientIDs'
+XML_INGREDIENTST = 'ingredients'
+XML_DISH_STATES = 'dishStates'
+XML_DISH_IMAGE = 'dishImage'
+
 class LevelParser:
     def __init__(self, level_file):
         self.tree = ET.parse(level_file)
@@ -11,24 +21,23 @@ class LevelParser:
     def _obtain_ingredients(self, elem):
         ingredients = []
         for ing in elem:
-            print("Count in ing = " + str(len(ing)))
             name = None
             image = None
             steps = []
-            ingredient_id = ing.get('id')
-            group = ing.get('group')
+            ingredient_id = ing.get(XML_ID)
+            group = ing.get(XML_GROUP)
             for child in ing:
-                if child.tag == 'name':
+                if child.tag == XML_NAME:
                     name = child.text
-                elif child.tag == 'image':
+                elif child.tag == XML_IMAGE:
                     image = child.text
-                elif child.tag == 'steps':
+                elif child.tag == XML_STEPS:
                     for step in child:
                         steps.append(step.text)
             print(image)
             print(os.getcwd())
-            # ingredient = level.Ingredient(image, ingredient_id, group, steps)
-            # ingredients.append(ingredient)
+            ingredient = level.Ingredient(image, ingredient_id, group, steps)
+            ingredients.append(ingredient)
         return ingredients
 
     def _obtain_dish_image(self, elem):
@@ -41,9 +50,9 @@ class LevelParser:
             image = None
             ingredient_ids = []
             for child in dish_state:
-                if child.tag == 'image':
+                if child.tag == XML_IMAGE:
                     image = child.text
-                elif child.tag == 'ingredientIDs':
+                elif child.tag == XML_INGREDIENT_IDS:
                     for ingredientID in child:
                         ingredient_ids.append(ingredientID.text)
             dish_states.append(level.DishState(image, ingredient_ids))
@@ -53,19 +62,15 @@ class LevelParser:
         ingredients = None
         dish_states = None
         for child in self.root:
-            if child.tag == 'ingredients':
+            if child.tag == XML_INGREDIENTST:
                 ingredients = self._obtain_ingredients(child)
-            elif child.tag == 'dishImage':
+            elif child.tag == XML_DISH_IMAGE:
                 dish_image = self._obtain_dish_image(child)
-            elif child.tag == 'dishStates':
+            elif child.tag == XML_DISH_STATES:
                 dish_states = self._obtain_dish_states(child)
         pprint.pprint(ingredients)
         print(dish_image)
         return level.Level(dish_image, ingredients, dish_states)
-        # ingredients = self.root.iter('ingredients')
-        # for ingredient in ingredients:
-        #     print(ingredient.tag)
-        #     print(ingredient.attrib)
             
 
 
