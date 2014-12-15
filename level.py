@@ -1,10 +1,5 @@
 import pyglet
 import random
-<<<<<<< HEAD
-=======
-
-#from gameplay import Plate
->>>>>>> f60ab3961ba7f0348c77d71e440f1249c51707ab
 from consts import GAMEAREA_W, GAMEAREA_H
 
 
@@ -13,7 +8,6 @@ class Level:
     collected = []
 
     def __init__(self, dish_image, ingredients, dish_states):
-#        self.ingredients.append(Ingredient('carrot.png', 1, 1, [0, 1], None, None))
         self.dish_image = dish_image
         self.ingredients = ingredients
         self.dish_states = dish_states
@@ -71,7 +65,7 @@ class Level:
 
 
 class Ingredient(pyglet.sprite.Sprite):
-    def __init__(self, image, ingredient_id, group, steps, ccollect_sound = 'collect.wav', drop_sound = 'drop.wav', batch = None):
+    def __init__(self, image, ingredient_id, group, steps, collect_sound = 'collect.wav', drop_sound = 'drop.wav', batch = None):
         self.batch = batch
         self.steps = steps
         self.ingredient_id = ingredient_id
