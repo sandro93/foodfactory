@@ -34,7 +34,7 @@ class LevelParser:
                 elif child.tag == XML_STEPS:
                     for step in child:
                         steps.append(step.text)
-            print(image)
+            print('surati '+image)
             print(os.getcwd())
             ingredient = level.Ingredient(image, ingredient_id, group, steps)
             ingredients.append(ingredient)
@@ -69,7 +69,7 @@ class LevelParser:
             elif child.tag == XML_DISH_STATES:
                 dish_states = self._obtain_dish_states(child)
         pprint.pprint(ingredients)
-        print(dish_image)
+        print(dish_image)        
         return level.Level(dish_image, ingredients, dish_states)
             
 

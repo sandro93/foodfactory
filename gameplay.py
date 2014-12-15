@@ -14,9 +14,7 @@ class Plate(pyglet.sprite.Sprite):
         x = GAMEAREA_CENTER_X - plate_img.width // 2
         y = 0
         dx = PLATE_SPEED
-        super(Plate, self).__init__(plate_img, x, y)
-        self.world = World('guria')
-        self.level = self.world.get_level(1)
+        super(Plate, self).__init__(plate_img, x, y)        
         # self.collect_sound = pyglet.resource.media(COLLECT_SOUND, streaming=False)
 
     def update(self, keys_pressed, dt):
@@ -46,6 +44,8 @@ class PlayState(GameState):
         self.chef = pyglet.sprite.Sprite(chef_img, x=(STATUSBAR_X + STATUSBAR_W // 2), y=10)
         self.id = PLAY_STATE_ID
         self.keys_pressed = []
+        self.world = World('guria')
+        self.level = self.world.get_level(1)
 
     def on_draw(self):
         # draw status bar/gamearea separator
@@ -53,9 +53,12 @@ class PlayState(GameState):
                          ('v2i', (STATUSBAR_X, 0, STATUSBAR_X, STATUSBAR_H)))
         self.plate.draw()
         self.chef.draw()
+        self.level.on_draw()
 
     def update(self, dt):
         self.plate.update(self.keys_pressed, dt)
+        self.level.update(dt, self.plate)
+        
 
     def on_key_press(self, key, modifiers, states):
         if key in (pyglet.window.key.LEFT, pyglet.window.key.RIGHT):

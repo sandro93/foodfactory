@@ -1,39 +1,86 @@
 import pyglet
 import random
+<<<<<<< HEAD
+=======
+
+#from gameplay import Plate
+>>>>>>> f60ab3961ba7f0348c77d71e440f1249c51707ab
 from consts import GAMEAREA_W, GAMEAREA_H
 
 
 class Level:
     ingredients = []
-    
+    collected = []
+
     def __init__(self, dish_image, ingredients, dish_states):
 #        self.ingredients.append(Ingredient('carrot.png', 1, 1, [0, 1], None, None))
         self.dish_image = dish_image
         self.ingredients = ingredients
         self.dish_states = dish_states
-        self.total_steps = 0
-        
+        self.needed_ingredients = 0
+        self.current_step = 1
+        self.ingredient_batch = pyglet.graphics.Batch()
+        #self.current_ingredients = []
+
         for ing in self.ingredients:
+            if int(ing.grp) == int(self.current_step):
+                ing.batch = self.ingredient_batch
+                #self.current_ingredients.append(ing)
             if len(ing.steps):
-                self.total_steps += 1
+                self.needed_ingredients += 1
+
+    def on_draw(self):
+        self.ingredient_batch.draw()
+
+    def update(self, dt, plate):
+        #self.current_step += 1
+
+        if len(self.collected) == self.needed_ingredients:
+            print('you won!')
+            states.pop()
+
+        for ing in self.ingredients :
+            if int(ing.grp) == int(self.current_step):
+                result = ing.update(dt, plate)
+                print('res: '+str(result))
+                if result == 1:
+                    is_needed = False
+                    #for step in ing.steps:
+                    if self.current_step in ing.steps :
+                        self.collected.append(ing)
+                        is_needed = True
+                        #break
+
+                    self.ingredients.remove(ing)
+
+                    if not is_needed:
+                        print('Arascori aigo')
+                        states.pop();
+
+                elif result == -1:
+                    self.ingredients.remove(ing)
+
+
+
+
+
+
+
+
 
 
 
 class Ingredient(pyglet.sprite.Sprite):
-    def __init__(self, image, ingredient_id, group, steps, collect_sound = 'collect.wav', drop_sound = 'drop.wav'):
-        print("Image = {0}, ingredient_id = {1}, group = {2}, steps = {3}".format(image, ingredient_id, group, steps))
+    def __init__(self, image, ingredient_id, group, steps, ccollect_sound = 'collect.wav', drop_sound = 'drop.wav', batch = None):
+        self.batch = batch
         self.steps = steps
         self.ingredient_id = ingredient_id
         self.grp = group
-        ingredient_image = pyglet.resource.image(image)
-        # self.width = ingredient_image.width
-        # self.height = ingredient_image.height
-        x = random.random() * (GAMEAREA_W - ingredient_image.width)
-        y = GAMEAREA_H - ingredient_image.height
-        super(Ingredient, self).__init__(ingredient_image, x, y)
+        self.ingredient_image = pyglet.resource.image(image)
+        x = random.random() * (GAMEAREA_W - self.ingredient_image.width)
+        y = GAMEAREA_H - self.ingredient_image.height
 
-        #super(Ingredient, self).__init__(self.ingredient_image, x, y, batch=balls_batch)
-
+        super(Ingredient, self).__init__(self.ingredient_image, x, y)
         self.collect_sound = pyglet.resource.media(collect_sound, streaming=False)
         self.drop_sound = pyglet.resource.media(drop_sound, streaming=False)
         self.dy = 1 * 300
@@ -43,16 +90,22 @@ class Ingredient(pyglet.sprite.Sprite):
 ##        self.set_position(chef.x, chef.y + chef.height + 10)
 ##        self.is_collected = True
 
-##    def update(self, dt, plate):
-##        if not self.is_collected:
-##            if self.y + self.height <= plate.height:
-##                if self.x >= plate.x and self.x <= plate.x + plate.width:
-##                    self.collect_sound.play()
-##                    balls[-1].collect()
-##                else:
-##                    self.drop_sound.play()
-##                    del balls[-1]
-##            self.y -= self.dy * dt
+    def update(self, dt, plate):
+        #if not self.is_collected:
+        result = 0
+        if self.y + self.height <= plate.height:
+            if self.x >= plate.x and self.x <= plate.x + plate.width:
+                #self.collect_sound.play()
+                #balls[-1].collect()
+                result = 1
+            else:
+                #self.drop_sound.play()
+                #del balls[-1]
+                result = -1
+
+        self.y -= self.dy * dt
+        return result
+
 
 class DishState():
     def __init__(self, image, ingredient_ids):
